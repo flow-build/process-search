@@ -42,15 +42,22 @@ npm install
 
 ## Configuration
 
-Create or update the `.env.development` file in the project root with your database connection details.
+Update the `.env.development` file in the project root if needed.
 Default values are provided for local development:
 
 ```env
-PROCESS_SEARCH_DB_USER=postgres
-PROCESS_SEARCH_DB_PASSWORD=postgres
-PROCESS_SEARCH_DB_DB=workflow
-PROCESS_SEARCH_DB_HOST=localhost
-PROCESS_SEARCH_DB_PORT=5432
+LOG_LEVEL=info
+CRON_JOB_SCHEDULE='* * * * *' # every 1 minute
+FLOWBUILD_DB_USER=postgres
+FLOWBUILD_DB_PASSWORD=postgres
+FLOWBUILD_DB_DB=workflow
+FLOWBUILD_DB_HOST=localhost
+FLOWBUILD_DB_PORT=5432
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_DB=process_search
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5433
 ```
 
 ## Running
