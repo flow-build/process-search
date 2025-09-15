@@ -1,0 +1,54 @@
+{
+  "name": "process-search",
+  "version": "1.0.0",
+  "description": "Application to execute FlowBuild process searches",
+  "main": "dist/index.js",
+  "type": "commonjs",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "dev": "npm run services:up && npm run services:wait:database && npm run server:dev",
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+(ts)\"",
+    "lint": "eslint . --ext .ts",
+    "server:dev": "nodemon --exec ts-node -r tsconfig-paths/register ./src/infra/api/server.ts",
+    "services:up": "docker compose up -d",
+    "services:wait:database": "ts-node -r tsconfig-paths/register ./src/infra/scripts/wait-for-postgres.ts",
+    "start": "node dist/src/infra/api/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flow-build/process-search.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/flow-build/process-search/issues"
+  },
+  "homepage": "https://github.com/flow-build/process-search#readme",
+  "devDependencies": {
+    "@types/express": "5.0.3",
+    "@types/lodash": "4.17.20",
+    "@types/node": "24.4.0",
+    "@types/pg": "8.15.5",
+    "@typescript-eslint/eslint-plugin": "8.43.0",
+    "@typescript-eslint/parser": "8.43.0",
+    "eslint": "8.57.0",
+    "eslint-config-prettier": "9.1.0",
+    "nodemon": "3.1.10",
+    "prettier": "2.8.8",
+    "ts-node": "10.9.2",
+    "tsc-alias": "1.8.16",
+    "tsconfig-paths": "4.2.0",
+    "typescript": "5.9.2"
+  },
+  "dependencies": {
+    "dotenv": "17.2.2",
+    "express": "5.1.0",
+    "knex": "3.1.0",
+    "lodash": "4.17.21",
+    "node-cron": "4.2.1",
+    "pg": "8.16.3",
+    "winston": "3.17.0",
+    "zod": "4.1.8"
+  }
+}
