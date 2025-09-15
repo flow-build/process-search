@@ -16,9 +16,9 @@ The service exposes a small REST API to run searches against the indexed process
 
 3. **Load / Index:**
 
-- Upserts the transformed data into the `process_search` database
+   - Upserts the transformed data into the `process_search` database
 
-- Maintains `tsvector` columns and `GIN` indexes so queries are fast.
+   - Maintains `tsvector` columns and `GIN` indexes so queries are fast.
 
 4. **Query:** The REST API performs full-text queries using `to_tsquery`/`plainto_tsquery` or the `@@` operator against the vector columns and returns matching processes.
 
@@ -245,5 +245,3 @@ The `final_bag_vector` and `history_vector` columns are generated from the JSON 
 - Currently only _"finished"_ processes are indexed. If you need partial / running processes searchable, the ETL should include them.
 
 - ETL runs on a schedule (default every minute) — there is a small window between a process finishing and it becoming searchable.
-
-- Pagination and advanced faceting/filtering are minimal; consider adding offset/cursor pagination and filters (date ranges, workflow_id, status).

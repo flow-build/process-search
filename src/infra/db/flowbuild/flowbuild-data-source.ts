@@ -35,7 +35,9 @@ export async function fetchFinishedProcessesWithExceptions(
       .whereNotIn('id', chunk)
       .orderBy('created_at', 'desc')
 
-    processes.push(...fetchedProcesses.filter((p) => !exceptionIds.includes(p.id)))
+    processes.push(
+      ...fetchedProcesses.filter((p) => !exceptionIds.includes(p.id))
+    )
   }
 
   return processes
