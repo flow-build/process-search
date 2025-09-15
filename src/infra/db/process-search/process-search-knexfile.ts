@@ -10,6 +10,9 @@ export const processSearchKnexConfig: Knex.Config = {
     password: envs.POSTGRES_PASSWORD,
     database: envs.POSTGRES_DB,
   },
+  migrations: {
+    directory: './migrations',
+  },
 }
 
 export default processSearchKnexConfig

@@ -8,9 +8,12 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "dev": "npm run services:up && npm run services:wait:database && npm run server:dev",
+    "dev": "npm run services:up && npm run services:wait:database && npm run migrations && npm run server:dev",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(ts)\"",
     "lint": "eslint . --ext .ts",
+    "migrations": "knex migrate:latest --knexfile ./src/infra/db/process-search/process-search-knexfile.ts",
+    "migration:create": "knex migrate:make --knexfile ./src/infra/db/process-search/process-search-knexfile.ts -x ts",
+    "migrations:rollback": "knex migrate:rollback --knexfile ./src/infra/db/process-search/process-search-knexfile.ts",
     "server:dev": "nodemon --exec ts-node -r tsconfig-paths/register ./src/infra/api/server.ts",
     "services:up": "docker compose up -d",
     "services:wait:database": "ts-node -r tsconfig-paths/register ./src/infra/scripts/wait-for-postgres.ts",

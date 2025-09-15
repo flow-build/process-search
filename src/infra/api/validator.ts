@@ -7,33 +7,32 @@ export function validateSearchRequest(
   next: () => void
 ) {
   const schema = z.object({
-    query: z
-      .string().min(1).optional(),
-      // .object({
-      //   finalBag: z.string().min(1).optional(),
-      //   history: z.string().min(1).optional(),
-      //   general: z.string().min(1).optional(),
-      // })
-      // .superRefine((data, ctx) => {
-      //   const definedProps = [data.finalBag, data.history, data.general].filter(
-      //     (val) => val !== undefined
-      //   )
+    query: z.string().min(1).optional(),
+    // .object({
+    //   finalBag: z.string().min(1).optional(),
+    //   history: z.string().min(1).optional(),
+    //   general: z.string().min(1).optional(),
+    // })
+    // .superRefine((data, ctx) => {
+    //   const definedProps = [data.finalBag, data.history, data.general].filter(
+    //     (val) => val !== undefined
+    //   )
 
-      //   if (definedProps.length > 1) {
-      //     ctx.addIssue({
-      //       code: 'custom',
-      //       message:
-      //         'Only one of finalBag, history, or general must be present.',
-      //     })
-      //   }
+    //   if (definedProps.length > 1) {
+    //     ctx.addIssue({
+    //       code: 'custom',
+    //       message:
+    //         'Only one of finalBag, history, or general must be present.',
+    //     })
+    //   }
 
-      //   if (definedProps.length === 0) {
-      //     ctx.addIssue({
-      //       code: 'custom',
-      //       message: 'One of finalBag, history, or general must be present.',
-      //     })
-      //   }
-      // }),
+    //   if (definedProps.length === 0) {
+    //     ctx.addIssue({
+    //       code: 'custom',
+    //       message: 'One of finalBag, history, or general must be present.',
+    //     })
+    //   }
+    // }),
     limit: z.number().int().optional(),
   })
 

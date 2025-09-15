@@ -1,28 +1,5 @@
-import { ProcessDocument } from "@src/config/types"
-import { processSearchDB } from "./process-search-knexfile"
-
-export async function initializeDatabase() {
-  return await processSearchDB.raw(`
-    CREATE TABLE IF NOT EXISTS process_search (
-      id UUID PRIMARY KEY,
-      workflow_id UUID NOT NULL,
-      final_status VARCHAR(50) NOT NULL,
-      started_at TIMESTAMP WITH TIME ZONE NOT NULL,
-      finished_at TIMESTAMP WITH TIME ZONE,
-      final_bag JSONB,
-      history JSONB,
-      final_bag_vector tsvector GENERATED ALWAYS AS (
-        jsonb_to_tsvector('english', final_bag, '["all"]')
-      ) STORED,
-      history_vector tsvector GENERATED ALWAYS AS (
-        jsonb_to_tsvector('english', history, '["all"]')
-      ) STORED
-    );
-    
-    CREATE INDEX IF NOT EXISTS process_search_final_bag_vector_idx ON process_search USING GIN (final_bag_vector);
-    CREATE INDEX IF NOT EXISTS process_search_history_vector_idx ON process_search USING GIN (history_vector);
-  `)
-}
+import { ProcessDocument } from '@src/config/types'
+import { processSearchDB } from './process-search-knexfile'
 
 export async function insertProcessOnSearchTable(process: ProcessDocument) {
   return await processSearchDB
@@ -58,4 +35,13 @@ export async function queryProcessOnSearchTable({
       [query, query]
     )
     .limit(limit)
+    .select(
+      'id',
+      'workflow_id',
+      'final_status',
+      'started_at',
+      'finished_at',
+      'final_bag',
+      'history'
+    )
 }

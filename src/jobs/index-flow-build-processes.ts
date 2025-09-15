@@ -5,7 +5,10 @@ import {
   fetchFinishedProcessesWithExceptions,
   fetchProcessStatesByProcessId,
 } from '@src/infra/db/flowbuild/flowbuild-data-source'
-import { fetchFinishedProcessesOnSearchTable, insertProcessOnSearchTable } from '@src/infra/db/process-search/process-search-data-source'
+import {
+  fetchFinishedProcessesOnSearchTable,
+  insertProcessOnSearchTable,
+} from '@src/infra/db/process-search/process-search-data-source'
 
 let isRunning = false
 
@@ -27,12 +30,13 @@ export async function indexFlowBuildProcesses() {
     )
 
     if (processes?.length === 0) {
-      logger.info('No new finished processes found.')
+      logger.info('No new finished processes found')
       logger.info('✅ indexFlowBuildProcesses job finished')
       return
     }
 
     logger.info(`Found ${processes?.length} finished processes to index`)
+    logger.info('🚧 Indexing processes...')
 
     let builtCount = 0
 
@@ -68,10 +72,8 @@ export async function indexFlowBuildProcesses() {
     }
 
     logger.info(
-      `Finished indexing documents. Total indexed: ${builtCount} / ${processes.length}`
+      `✅ Finished indexing documents. Total indexed: ${builtCount} / ${processes.length}`
     )
-
-    logger.info('✅ indexFlowBuildProcesses job finished')
   } catch (err) {
     logger.error(`❌ indexFlowBuildProcesses job error: ${err}`)
   } finally {

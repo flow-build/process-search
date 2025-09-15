@@ -1,5 +1,5 @@
 import dotenv from 'dotenv'
-dotenv.config({ path: '.env.development' })
+dotenv.config({ path: '../.env.development' })
 
 export const envs = {
   LOG_LEVEL: process.env.LOG_LEVEL ?? 'info',
@@ -12,7 +12,7 @@ export const envs = {
   FLOWBUILD_DB_PORT: parseInt(process.env.FLOWBUILD_DB_PORT ?? '5432'),
   POSTGRES_USER: process.env.POSTGRES_USER ?? 'postgres',
   POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD ?? 'postgres',
-  POSTGRES_DB: process.env.POSTGRES_DB ?? 'workflow',
+  POSTGRES_DB: process.env.POSTGRES_DB ?? 'process_search',
   POSTGRES_HOST: process.env.POSTGRES_HOST ?? 'localhost',
   POSTGRES_PORT: parseInt(process.env.POSTGRES_PORT ?? '5433'),
 }
